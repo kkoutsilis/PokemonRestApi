@@ -38,4 +38,8 @@ public class PokemonService {
     public int updatePokemonById(UUID id,Pokemon newPokemon){
         return pokemonDao.updatePokemonById(id,newPokemon);
     }
+
+    public List<Pokemon> getPokemonByType(String type){
+        return pokemonDao.selectPokemonByType(type);
+    }
 }

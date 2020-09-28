@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("api/v1/pokemon")
-@RestController public class PokemonController {
+@RestController
+public class PokemonController {
 
     private final PokemonService pokemonService;
 
@@ -21,7 +22,7 @@ import java.util.UUID;
     }
 
     @PostMapping
-    public void addPokemon(@Valid @NotNull@RequestBody Pokemon pokemon) {
+    public void addPokemon(@Valid @NotNull @RequestBody Pokemon pokemon) {
         pokemonService.addPokemon(pokemon);
     }
 
@@ -30,18 +31,24 @@ import java.util.UUID;
         return pokemonService.getAllPokemon();
     }
 
-    @GetMapping(path="{id}")
-    public Pokemon getPokemonById(@PathVariable("id") UUID id){
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+    public Pokemon getPokemonById(@PathVariable("id") UUID id) {
         return pokemonService.getPokemonById(id).orElse(null);
     }
-    @DeleteMapping(path="{id}")
-    public void deletePokemonById(@PathVariable("id") UUID id){
+
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.DELETE)
+    public void deletePokemonById(@PathVariable("id") UUID id) {
         pokemonService.deletePokemonById(id);
     }
 
-    @PutMapping(path="{id}")
-    public void updatePokemonById(@PathVariable("id")UUID id ,@Valid @NotNull @RequestBody Pokemon pokemonToUpdate){
-        pokemonService.updatePokemonById(id,pokemonToUpdate);
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.PUT)
+    public void updatePokemonById(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Pokemon pokemonToUpdate) {
+        pokemonService.updatePokemonById(id, pokemonToUpdate);
+    }
+
+    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
+    public List<Pokemon> getPokemonByType(@PathVariable("type") String type) {
+        return pokemonService.getPokemonByType(type);
     }
 
 }

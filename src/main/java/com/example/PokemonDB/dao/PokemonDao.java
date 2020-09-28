@@ -22,4 +22,6 @@ public interface PokemonDao {
     int deletePokemonById(UUID id);
 
     int updatePokemonById(UUID id,Pokemon pokemon);
+
+    List<Pokemon> selectPokemonByType(String type);
 }
