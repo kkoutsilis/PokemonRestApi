@@ -1,1 +1,2 @@
-Pokemon API 
+Pokemon restfull API  
+Project in progress  
